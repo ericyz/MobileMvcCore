@@ -13,6 +13,9 @@ namespace Sample1.Services
 
     public class SuperSmartDeviceHandler : IDeviceHandler
     {
-        public bool IsMobileRequest(HttpRequest request) => request.Headers["User-Agent"].Any(t => t.ToUpper().Contains("MOBILE")) || request.Host.Value.StartsWith("m.");
+        public bool IsMobileRequest(HttpRequest request) 
+            => request.Headers["User-Agent"].Any(t => t.ToUpper().Contains("MOBILE"))
+                || request.Host.Value.ToLower().StartsWith("m.")
+                || request.Path.Value.ToLower().StartsWith("/m/");
     }
 }
