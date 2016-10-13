@@ -1,11 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<br/>
-<div class="visible-sm visible-xs hidden-lg">
-	I'm MOBILE
-</div>
+@using Sample1.Services
+@inject IDeviceService device
+<br />
 
-<div class="visible-md visible-lg hidden-sm">
-	I'm DESKTOP
-</div>
+@if (device.IsMobile)
+{
+	<div>
+		I'm MOBILE
+	</div>
+}
+else
+{
+	<div>
+		I'm DESKTOP
+	</div>
+}

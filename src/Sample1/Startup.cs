@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using Sample1.Services;
 
 namespace Sample1
 {
@@ -30,7 +31,10 @@ namespace Sample1
         {
             // Add framework services.
             services.AddMvc();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IDeviceHandler, SuperSmartDeviceHandler>();
+            services.AddTransient<IDeviceService, DeviceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
