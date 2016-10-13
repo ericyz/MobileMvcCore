@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Sample1.Services;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Sample1
 {
@@ -35,6 +36,12 @@ namespace Sample1
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IDeviceHandler, SuperSmartDeviceHandler>();
             services.AddTransient<IDeviceService, DeviceService>();
+            services.AddTransient<DeviceViewLocation>();
+
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(services.BuildServiceProvider().GetService<DeviceViewLocation>());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
